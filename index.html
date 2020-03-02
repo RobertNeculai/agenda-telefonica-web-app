@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Personal Phone Book</title>
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" /></head>
+<body>https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css
+<h1>Online Personal Phone Book</h1>
+<div id="add-task">
+    <h3>Add Contacts To The Phone Book List</h3>
+    <form id="new-contact-form">
+        <label for="first_name-field">First Name: </label><input type="text" id="first_name-field"
+                                                                   placeholder="Enter First Name"/>
+        <label for="last_name-field">Last Name: </label><input type="text" id="last_name-field" placeholder="Enter Last Name"/>
+        <label for="phonenumber-field">Phone Number: </label><input type="number" id="phonenumber-field" placeholder="Enter Phone Number"/>
+
+        <input type="submit"/>
+    </form>
+</div>
+<div>
+    <table id="Contacts-table">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Number<th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+<script src="js/lib/jquery-3.4.1.js"></script>
+<script src="js/Contacts.js"></script>
+</body>
+</html>
