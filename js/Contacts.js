@@ -63,10 +63,6 @@ window.PhoneBook ={
             </a> </td>
         </tr>`
     },
-
-    updatePhoneNumber: function(id) {
-       let pn= $(".update-mark").replaceWith($(`<input type="tel" placeholder="Enter new Phone Number" data-id=${id} class="phonebook-update">`),`<input type="button" data-id=${id} value="Submit Changes" class="submit-mark">`);
-    },
     displayContacts: function (contacts) {
         // weak-typed (javascript) vs strong-typed (java)
         var tableBody = '';
@@ -83,7 +79,7 @@ window.PhoneBook ={
         $("#Contacts-table").delegate(".update-mark", "click", function (event) {
             event.preventDefault();
             let contactId = $(this).data("id");
-            PhoneBook.updatePhoneNumber(contactId);
+            $(this).replaceWith($(`<input type="tel" placeholder="Enter new Phone Number" data-id=${contactId} class="phonebook-update">`),`<input type="button" data-id=${contactId} value="Submit Changes" class="submit-mark">`);
         });
         $("#Contacts-table").delegate(".submit-mark","click",function (event) {
 
@@ -93,8 +89,9 @@ window.PhoneBook ={
 
             if(phonenumber==null || phonenumber=="" || !phonenumber?.match("(?=.*[0-9]).*"))
             {
-                console.log("Cannot update with null or non-numeric value")
-                PhoneBook.getContacts();
+                console.log("Cannot update with null or non-numeric value");
+                $(this).siblings(".phonebook-update").val("");
+                /*PhoneBook.getContacts();*/
             }
             else {
                 //reading value of attributes prefixed with "data-"
