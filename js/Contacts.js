@@ -13,11 +13,13 @@ window.PhoneBook ={
         let firstNameValue=$("#first_name-field").val();
         let lastNameValue=$("#last_name-field").val();
         let phoneNumberValue=$("#phonenumber-field").val();
+        let emailValue=$("#email-field").val();
 
         let requestBody={
-            firstName: firstNameValue,
-            lastName: lastNameValue,
-            phonenumber: phoneNumberValue
+            first_name: firstNameValue,
+            last_name: lastNameValue,
+            phonenumber: phoneNumberValue,
+            email: emailValue
         };
         $.ajax({
             url: PhoneBook.API_BASE_URL,
@@ -29,7 +31,7 @@ window.PhoneBook ={
             PhoneBook.getContacts();
         })
     },
-    updateContacts: function(id,phonenumber){
+    updateContactsPhoneNumber: function(id,phonenumber){
         let requestBody={
            phonenumber: phonenumber
         };
@@ -58,6 +60,7 @@ window.PhoneBook ={
             <td> ${contact.last_name} </td>
             <td> ${contact.first_name} </td>
             <td> ${contact.phonenumber} </td>
+            <td> ${contact.email} </td>
             <td><input type="button" value="Update Phone Number" data-id=${contact.id}  class="update-mark"></td>
             <td><a href="#" data-id="${contact.id}" class="delete-contact"> <i class="fas fa-trash-alt"></i>
             </a> </td>
@@ -75,14 +78,18 @@ window.PhoneBook ={
             event.preventDefault();
             PhoneBook.createContacts();
         });
+        $("#email-checkbox").change(function (event) {
+            event.preventDefault();
+            $(this).replaceWith($(`<input type="text" id="email-field" placeholder="Enter email adress">`));
+        });
         //delegate is neccesary since .mark-done element does not exist on initialise
         $("#Contacts-table").delegate(".update-mark", "click", function (event) {
             event.preventDefault();
             let contactId = $(this).data("id");
-            $(this).replaceWith($(`<input type="tel" placeholder="Enter new Phone Number" data-id=${contactId} class="phonebook-update">`),`<input type="button" data-id=${contactId} value="Submit Changes" class="submit-mark">`);
+            $(this).replaceWith($(`<input type="tel" placeholder="Enter new Phone Number" data-id=${contactId} class="phonebook-update">`),
+                `<input type="button" data-id=${contactId} value="Submit Changes" class="submit-mark">`);
         });
         $("#Contacts-table").delegate(".submit-mark","click",function (event) {
-
             event.preventDefault();
             let contactId=$(this).data("id");
             let phonenumber = $(this).siblings(".phonebook-update").val();
@@ -95,13 +102,11 @@ window.PhoneBook ={
             }
             else {
                 //reading value of attributes prefixed with "data-"
-                PhoneBook.updateContacts(contactId, phonenumber);
+                PhoneBook.updateContactsPhoneNumber(contactId, phonenumber);
             }
-
         });
         $("#Contacts-table").delegate(".delete-contact", "click", function (event) {
             event.preventDefault();
-            //reading value of attributes prefixed with "data-"
             let contactId = $(this).data("id");
             PhoneBook.deleteContacts(contactId);
         });

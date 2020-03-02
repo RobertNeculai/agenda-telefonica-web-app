@@ -10,7 +10,7 @@
     padding: 8px;
 }
 
-#Contacts-table tr:nth-child(even){background-color: gray;}
+#Contacts-table tr:nth-child(even){background-color: slategray;}
 
 #Contacts-table tr:hover {background-color: #ddd;}
 

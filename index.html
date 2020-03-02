@@ -20,13 +20,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" /></head>
 <body>https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css
 <h1 style="align-self: center">Online Personal Phone Book</h1>
-<div id="add-task">
+<div id="add-contact">
     <h3>Add Contacts To The Phone Book List</h3>
     <form id="new-contact-form">
         <label for="first_name-field">First Name: </label><input type="text" id="first_name-field"
                                                                    placeholder="Enter First Name"/>
         <label for="last_name-field">Last Name: </label><input type="text" id="last_name-field" placeholder="Enter Last Name"/>
         <label for="phonenumber-field">Phone Number: </label><input type="number" id="phonenumber-field" placeholder="Enter Phone Number"/>
+        <label for="email-checkbox">Add email Adress :</label><input type="checkbox" id="email-checkbox" title="Check this box if you want to add an Email Adress to this contact"/>
 
         <input type="submit"/>
     </form>
@@ -37,7 +38,8 @@
         <tr>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Phone Number<th>
+            <th>Phone Number</th>
+            <th>Email adress</th>
             <th>Actions</th>
         </tr>
         </thead>
