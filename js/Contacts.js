@@ -44,6 +44,19 @@ window.PhoneBook ={
             PhoneBook.getContacts();
         });
     },
+    updateContactsEmail: function(id,email) {
+        let requestBody = {
+            email: email
+        };
+        $.ajax({
+            url: PhoneBook.API_BASE_URL + "?id=" + id,
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(requestBody)
+        }).done(function () {
+            PhoneBook.getContacts();
+        });
+    },
     deleteContacts: function(id) {
         $.ajax({
             url: PhoneBook.API_BASE_URL + "?id=" + id,
@@ -61,7 +74,8 @@ window.PhoneBook ={
             <td> ${contact.first_name} </td>
             <td> ${contact.phonenumber} </td>
             <td> ${contact.email} </td>
-            <td><input type="button" value="Update Phone Number" data-id=${contact.id}  class="update-mark"></td>
+            <td><input type="button" value="Update Phone Number" data-id=${contact.id}  class="update-mark">
+             <input type="button" value="Update Email" data-id=${contact.id}  class="email-mark"></td>
             <td><a href="#" data-id="${contact.id}" class="delete-contact"> <i class="fas fa-trash-alt"></i>
             </a> </td>
         </tr>`
@@ -88,6 +102,24 @@ window.PhoneBook ={
             let contactId = $(this).data("id");
             $(this).replaceWith($(`<input type="tel" placeholder="Enter new Phone Number" data-id=${contactId} class="phonebook-update">`),
                 `<input type="button" data-id=${contactId} value="Submit Changes" class="submit-mark">`);
+        });
+        $("#Contacts-table").delegate(".email-mark","click",function (event) {
+            event.preventDefault();
+            let contactId = $(this).data("id");
+            $(this).replaceWith($(`<input type="text" placeholder="Enter New Email Adress" data-id=${contactId} class="email-update">`),
+                `<input type="button" data-id=${contactId} value="Submit Changes" class="submitemail-mark">`);
+        });
+        $("#Contacts-table").delegate(".submitemail-mark","click",function (event) {
+            event.preventDefault();
+            let contactId=$(this).data("id");
+            let email=$(this).siblings(".email-update").val();
+            if(email==null || email=="") {
+                console.log("Cannot update with null value");
+                $(this).siblings(".email-update").val("");
+            }
+            else
+                PhoneBook.updateContactsEmail(contactId,email);
+
         });
         $("#Contacts-table").delegate(".submit-mark","click",function (event) {
             event.preventDefault();
