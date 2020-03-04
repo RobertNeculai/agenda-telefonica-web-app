@@ -24,7 +24,6 @@ window.PhoneBook ={
         $.ajax({
             url: PhoneBook.API_BASE_URL,
             method: "POST",
-            //also known as MIME type
             contentType: "application/json",
             data: JSON.stringify(requestBody)
         }).done(function (requestBody) {
@@ -66,9 +65,7 @@ window.PhoneBook ={
         });
     },
     getContactRow: function (contact) {
-        // spread operator( ... )
-        //ternary operator
-        // same result as using if else statements
+
         return `<tr>
             <td> ${contact.last_name} </td>
             <td> ${contact.first_name} </td>
@@ -81,7 +78,6 @@ window.PhoneBook ={
         </tr>`
     },
     displayContacts: function (contacts) {
-        // weak-typed (javascript) vs strong-typed (java)
         var tableBody = '';
         contacts.forEach(contact => tableBody+=PhoneBook.getContactRow(contact));
         $("#Contacts-table tbody").html(tableBody);
@@ -96,7 +92,6 @@ window.PhoneBook ={
             event.preventDefault();
             $(this).replaceWith($(`<input type="text" id="email-field" placeholder="Enter email adress">`));
         });
-        //delegate is neccesary since .mark-done element does not exist on initialise
         $("#Contacts-table").delegate(".update-mark", "click", function (event) {
             event.preventDefault();
             let contactId = $(this).data("id");
@@ -130,10 +125,8 @@ window.PhoneBook ={
             {
                 console.log("Cannot update with null or non-numeric value");
                 $(this).siblings(".phonebook-update").val("");
-                /*PhoneBook.getContacts();*/
             }
             else {
-                //reading value of attributes prefixed with "data-"
                 PhoneBook.updateContactsPhoneNumber(contactId, phonenumber);
             }
         });
@@ -144,7 +137,5 @@ window.PhoneBook ={
         });
     }
 };
-
-//from api
 PhoneBook.getContacts();
 PhoneBook.bindEvents();
